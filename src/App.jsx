@@ -1,6 +1,7 @@
 import React from 'react';
 import defaultDataset from './dataset'
 import './assets/styles/style.css'
+import {AnswersList} from './components/index'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,9 @@ export default class App extends React.Component {
   render() {
     return (
       <section class="c-section">
-        <div class="c-box"></div>
+        <div class="c-box">
+          <AnswersList />
+        </div>
       </section>
     );
   }
