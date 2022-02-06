@@ -1,10 +1,21 @@
 import React from 'react'
-import './assets/styles/style.css'
+import '../assets/styles/style.css'
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
-const Answer = () => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    
+  },
+}));
+
+const Answer = (props) => {
+  // const classes = useStyles();
+
   return(
-    <div className="c-grid__answer">
-    </div>
+    <Button variant="contained" color="primary">
+      {props.content}
+    </Button>
   )
 }
 
