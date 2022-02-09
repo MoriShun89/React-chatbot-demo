@@ -12,7 +12,7 @@ export default class App extends React.Component {
       currentId: "init",
       dataset: defaultDataset,
       open: false
-    };
+    }
     this.selectAnswer = this.selectAnswer.bind(this)
   }
 
@@ -32,7 +32,7 @@ export default class App extends React.Component {
 
   selectAnswer = (selectedAnswer, nextQuestionId) => {
     switch (true) {
-      case (nextQuestionId === 'init') :
+      case (nextQuestionId === "init") :
         this.displayNextQuestion(nextQuestionId)
         break;
       default :
