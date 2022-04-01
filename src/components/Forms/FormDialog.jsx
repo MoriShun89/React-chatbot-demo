@@ -33,6 +33,7 @@ export default class FormDialog extends React.Component {
     this.setState({ description: event.target.value })
   }
 
+
   submitForm = () => {
     const name = this.state.name
     const email = this.state.email

@@ -1,8 +1,10 @@
 import React from 'react';
-import defaultDataset from './dataset'
 import './assets/styles/style.css'
 import {AnswersList, Chats} from './components/index'
 import FormDialog from './components/Forms/FormDialog';
+import { db } from './firebase/index'
+// 【Firebase ver.9の書き方】
+import { collection, getDocs } from 'firebase/firestore'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,7 +13,7 @@ export default class App extends React.Component {
       answers: [],
       chats: [],
       currentId: "init",
-      dataset: defaultDataset,
+      dataset: {},
       open: false
     }
     this.selectAnswer = this.selectAnswer.bind(this)
@@ -74,9 +76,37 @@ export default class App extends React.Component {
     this.setState({ open: false });
   };
 
+  initDataset = (dataset) => {
+    this.setState({dataset: dataset})
+  }
+
   componentDidMount() {
-    const initAnswer = "";
-    this.selectAnswer(initAnswer, this.state.currentId)
+    (async() => {
+      const dataset = this.state.dataset
+
+      // 【Firebase ver.8の書き方（講座の内容）】
+      // await db.collection('questions').get().then((snapshots) => {
+      //   snapshots.forEach((doc) => {
+      //     const id = doc.id
+      //     const data = doc.data()
+      //     dataset[id] = data
+      //   })
+      // })
+
+      // 【Firebase ver.9の書き方】
+      // 参考：https://tech-blog.cloud-config.jp/2021-11-12-firebasev9/#%E2%96%A1_v9_SDK
+      await getDocs(collection(db, 'questions')).then((snapshots) => {
+        snapshots.forEach((doc) => {
+          const id = doc.id
+          const data = doc.data()
+          dataset[id] = data
+        })
+      })
+
+      this.initDataset(dataset)
+      const initAnswer = "";
+      this.selectAnswer(initAnswer, this.state.currentId)
+    })()
   }
 
   componentDidUpdate() {
