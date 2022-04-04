@@ -1,6 +1,6 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDMTooYZmF7MtBXgM9Ct0GY0tegsbiun30",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "chatbot-demo-d64e6.firebaseapp.com",
   projectId: "chatbot-demo-d64e6",
   storageBucket: "chatbot-demo-d64e6.appspot.com",
